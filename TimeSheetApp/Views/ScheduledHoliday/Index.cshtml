@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TimeSheetApp.Models.SchHolidays>
+
+@{
+    ViewBag.Title = "Scheduled Vacations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Scheduled Vacations Index</h2>
+@if (ViewBag.UserEmail != null && ViewBag.UserEmail != "ALL" && User.Identity.Name.Split('-')[1] == (true).ToString())
+{
+    <h3 style="text-align:center">@Html.ActionLink("Create New", "Create", new { email = ViewBag.UserEmail })</h3>
+}
+
+
+<p>
+</p>
+<div id="ScheduledVacationsTable">
+    <table id="one-column-emphasis" summary="My Scheduled Vacations" style="width: 80%; text-align: center">
+        <colgroup>
+            <col class="oce-first" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th> Name </th>
+
+                <th> Vacation  Start Date </th>
+                <th> Vacation End Date </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserModel.Mobile)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserModel.Admin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserModel.LastLogin)
+                </th>
+                <th>@*@Html.ActionLink("Create New", "Create")*@</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.UserModel.FirstName @item.UserModel.LastName
+                    </td>
+
+                    <td>
+                        @item.HolidayStart.ToString(" ddd dd MMM yyyy ")
+                    </td>
+
+                    <td>
+                        @item.HolidayEnd.ToString(" ddd dd MMM yyyy ")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserModel.Mobile)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserModel.Admin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserModel.LastLogin)
+                    </td>
+                    <td>
+                        @if (User.Identity.Name.Split('-')[1] == (true).ToString())
+                        {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ScheduledHolidayId })
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

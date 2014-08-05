@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TimeSheetApp.Models.Sheet>
+@{
+    ViewBag.Title = "My Timesheets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@functions
+{
+    int CountApprovedDays(string s)
+    {
+        int counter = 0;
+        for (int i = 0; i < s.Length; i++)
+            if (s[i] == '1')
+                counter++;
+        return counter;
+    }    
+}
+<h2 style="text-align:center">Timesheets Query</h2>
+
+@if (Request.IsAuthenticated)
+{
+
+    <div id="SheetsTable">
+        <table id="one-column-emphasis" summary="Timesheets Query" style="width:80%;text-align:center" >
+            <colgroup>
+                <col class="oce-first" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">&nbsp Sheet  @Html.DisplayNameFor(model => model.StartDate) </th>
+                    <th scope="col">&nbsp Sheet  EndDate </th>
+                    <th scope="col">&nbsp Sheet  @Html.DisplayNameFor(model => model.ApprovedDays)         </th>
+                    <th scope="col">&nbsp Owner's Name      </th>
+                    <th scope="col">&nbsp Owner's @Html.DisplayNameFor(model => model.Email)      </th>
+                    <th scope="col">&nbsp Owner's Mobile      </th>
+                    <th scope="col">&nbsp Owner's Last Login      </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sheet in Model)
+                {
+                    <tr onclick="location.href='../Table/Index/@sheet.SheetId';">
+                        <td>@sheet.SheetId  </td>
+                        <td>@sheet.StartDate.ToString("ddd dd MMM yyyy")    </td>
+                        <td>@sheet.StartDate.AddDays(6).ToString("ddd dd MMM yyyy")    </td>
+                        <td>@CountApprovedDays(@sheet.ApprovedDays) out of 7    </td>
+                        <td>@sheet.UserModel.FirstName&nbsp @sheet.UserModel.LastName   </td>
+                        <td>@sheet.Email    </td>
+                        <td>@sheet.UserModel.Mobile    </td>
+                        <td>@sheet.UserModel.LastLogin    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>You should sign in to view this Page </p>
+}

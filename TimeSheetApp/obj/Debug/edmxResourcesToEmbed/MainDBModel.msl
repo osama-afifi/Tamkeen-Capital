@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MainSQLDBModelModelStoreContainer" CdmEntityContainer="MainSQLDBModelEntities2">
+    <EntitySetMapping Name="CasualHolidays">
+      <EntityTypeMapping TypeName="MainSQLDBModelModel.CasualHoliday">
+        <MappingFragment StoreEntitySet="CasualHolidays">
+          <ScalarProperty Name="CasualHolidayId" ColumnName="CasualHolidayId" />
+          <ScalarProperty Name="HolidayDay" ColumnName="HolidayDay" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScheduledHolidays">
+      <EntityTypeMapping TypeName="MainSQLDBModelModel.ScheduledHoliday">
+        <MappingFragment StoreEntitySet="ScheduledHolidays">
+          <ScalarProperty Name="ScheduledHolidayId" ColumnName="ScheduledHolidayId" />
+          <ScalarProperty Name="HolidayStart" ColumnName="HolidayStart" />
+          <ScalarProperty Name="HolidayEnd" ColumnName="HolidayEnd" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sheets">
+      <EntityTypeMapping TypeName="MainSQLDBModelModel.Sheet">
+        <MappingFragment StoreEntitySet="Sheets">
+          <ScalarProperty Name="SheetId" ColumnName="SheetId" />
+          <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
+          <ScalarProperty Name="ApprovedDays" ColumnName="ApprovedDays" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemUsers">
+      <EntityTypeMapping TypeName="MainSQLDBModelModel.SystemUser">
+        <MappingFragment StoreEntitySet="SystemUsers">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="MainSQLDBModelModel.Task">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="SheetId" ColumnName="SheetId" />
+          <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+          <ScalarProperty Name="TaskNotes" ColumnName="TaskNotes" />
+          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

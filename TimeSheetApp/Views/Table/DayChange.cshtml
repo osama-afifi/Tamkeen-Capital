@@ -1,0 +1,36 @@
+﻿@model TimeSheetApp.Models.DayViewModelList
+
+@{
+    ViewBag.Title = "DayChange";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset  style="text-align:center">
+        <legend>Hours Done</legend>
+        @for (int i = 0; i < Model.DayTasks.Count; i++)
+        {
+            
+            <div>
+                <div>Task @(i+1) : @Html.DisplayFor(m => m.DayTasks[i].dayTask.Description)</div>
+                <div>Notes : @Html.DisplayFor(m => m.DayTasks[i].dayTask.Notes)</div>
+                <div>@Html.EditorFor(m => m.DayTasks[i].hourValue)</div>
+                <hr />
+            </div>
+        }
+        <p>
+            <input type="submit" value="Change" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

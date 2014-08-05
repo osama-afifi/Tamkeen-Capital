@@ -1,0 +1,169 @@
+﻿@model TimeSheetApp.Models.TableViewModel
+
+@{
+    ViewBag.Title = "TimeSheet - " + Model.Sheet.StartDate.ToString("ddd dd MMM yyyy") + " " + Model.Sheet.StartDate.AddDays(6).ToString("ddd dd MMM yyyy");
+   Response.Cookies["UserInfo"]["TargetSheet"] = Model.Sheet.SheetId.ToString();
+    string OnClick = "";
+}
+
+@functions
+{
+    
+    int getHour(char c)
+    {
+        if (c == '0') return 0;
+        else return (int)(c - '0');
+    }
+
+    int totalHours(TimeSheetApp.Models.Task task)
+    {
+        int sum = 0;
+        for (int i = 0; i < 7; i++)
+            if (Model.Holiday[i] == '0')
+                sum += (int)(task.HoursDone[i] - '0');
+        return sum;
+    }
+
+    int totalDayHours(int day)
+    {
+        if (Model.Holiday[day] == '1')
+            return 0;
+        int sum = 0;
+        foreach (var task in Model.Sheet.Task)
+            sum += (int)(task.HoursDone[day] - '0');
+        return sum;
+    }
+    int totalSum()
+    {
+        int sum = 0;
+        for (int i = 0; i < 7; i++)
+            if (Model.Holiday[i] == '0')
+                foreach (var task in Model.Sheet.Task)
+                    sum += (int)(task.HoursDone[i] - '0');
+        return sum;
+    }
+}
+
+<h2 style="text-align: center">Timesheet:  @Model.Sheet.StartDate.ToString(" ddd dd MMM yyyy ") - @Model.Sheet.StartDate.AddDays(6).ToString(" ddd dd MMM yyyy")</h2>
+<h3 style="text-align: center">Owner : @Model.Sheet.UserModel.FirstName <span></span> @Model.Sheet.UserModel.LastName</h3>
+
+
+<div id="SheetsTable">
+    <div id ="CreateTask" style="text-align:center;font-family:Verdana;font:600;font-size:large">
+    @Html.ActionLink("New Task", "Create", "Task")
+        </div>
+    <table id="one-column-emphasis" summary="My Timesheets" style="width: 100%; text-align: center">
+        <colgroup>
+            <col class="oce-first" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th style="width: 15%">Date </th>
+                <th></th>
+                @foreach (var task in Model.Sheet.Task)
+                {                      
+                    <th 
+                    onclick="location.href='../../Task/Details/@task.TaskId';">@task.Description
+                    </th>                            
+                }
+                <th style="background-color: darkmagenta; color: white; width: 10%">Total Hours </th>
+                <th style="background-color: #037dff; color: white; width: 7%">Approved</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @for (int i = 0; i < 7; i++)
+            {
+
+                if (Model.Holiday[i] == '0')
+                { OnClick = "location.href='../DayChange?SheetID=" + Model.Sheet.SheetId + "&day=" + i + "'"; }
+                else
+                { OnClick = ""; }
+                
+                <tr onclick="@OnClick">
+
+                    @if (Model.Sheet.StartDate.AddDays(i).Day == DateTime.Now.Day && Model.Sheet.StartDate.AddDays(i).Month == DateTime.Now.Month && Model.Sheet.StartDate.AddDays(i).Year == DateTime.Now.Year)
+                    {
+                        <td style="color: #fff; background-color: #037dff"><strong>@Model.Sheet.StartDate.AddDays(i).ToString("ddd dd MMM yyyy")</strong></td>
+                    }
+                    else if (Model.Holiday[i] == '1')
+                    {
+                        <td style="background-color: #dddcdc">@Model.Sheet.StartDate.AddDays(i).ToString("ddd dd MMM yyyy")</td>
+                    }
+                    else
+                    {
+                        <td>@Model.Sheet.StartDate.AddDays(i).ToString("ddd dd MMM yyyy")</td>
+                    }
+                    <td></td>
+                    @foreach (var task in Model.Sheet.Task)
+                    {
+                        if (Model.Holiday[i] == '0')
+                        {
+                            if (Model.Approved[i] == 1)
+                            {
+                        <td style="background-color: #b6ff00"><strong>@getHour(task.HoursDone[i]) </strong></td>
+                            }
+                            else if (Model.Approved[i] == 2)
+                            {
+                        <td style="background-color: #fb4444"><strong>@getHour(task.HoursDone[i]) </strong></td>
+                            }
+                            else
+                            {
+                        <td><strong>@getHour(task.HoursDone[i]) </strong></td>
+                            }
+                        }
+                        else // Day is Holiday
+                        {
+                        <td><strong style="color: gray">- </strong></td>                        
+                        }
+                    }
+                    <td style="background-color: wheat; color: black">
+                        @totalDayHours(i)
+                    </td>
+
+                    @if (Model.Approved[i] == '0')
+                    {
+                        <td>
+                            @if (User.Identity.Name.Split('-')[1] == (true).ToString())
+                            {
+                                @Html.ActionLink("Approve|", "Approve", new { day = i, approve = 1 })
+                                
+                                @Html.ActionLink("Reject", "Approve", new { day = i, approve = 0 })
+                            }
+                        </td>
+                    }
+                    else if (Model.Approved[i] == '1')
+                    {
+                        <td style="background-color:#31ff00">
+                            @if (User.Identity.Name.Split('-')[1] == (true).ToString())
+                            {
+                                @Html.ActionLink("Reject", "Approve", new { day = i, approve = 0 })
+                            }
+                        </td>
+                    }
+                    else if (Model.Approved[i] == '2')
+                    {
+                        <td style="background-color:#f00">
+                            @if (User.Identity.Name.Split('-')[1] == (true).ToString())
+                            {
+                                @Html.ActionLink("Approve", "Approve", new { day = i, approve = 1 })
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+            <tr>
+                <td><strong>Hours Worked on Task </strong></td>
+                <td style="background-color: wheat; color: black"></td>
+                @foreach (var task in Model.Sheet.Task)
+                { 
+                    <td style="background-color: wheat; color: black">@totalHours(task)</td>
+                }
+                <td style="background-color: darkmagenta; color: white"><strong>@totalSum()</strong></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+ 
+</div>

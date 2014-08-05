@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MainSQLDBModelModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MainSQLDBModelModelStoreContainer">
+    <EntitySet Name="CasualHolidays" EntityType="MainSQLDBModelModel.Store.CasualHolidays" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScheduledHolidays" EntityType="MainSQLDBModelModel.Store.ScheduledHolidays" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sheets" EntityType="MainSQLDBModelModel.Store.Sheets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SystemUsers" EntityType="MainSQLDBModelModel.Store.SystemUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tasks" EntityType="MainSQLDBModelModel.Store.Tasks" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="CasualHolidays">
+    <Key>
+      <PropertyRef Name="CasualHolidayId" />
+    </Key>
+    <Property Name="CasualHolidayId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="HolidayDay" Type="datetime" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Reason" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ScheduledHolidays">
+    <Key>
+      <PropertyRef Name="ScheduledHolidayId" />
+    </Key>
+    <Property Name="ScheduledHolidayId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="HolidayStart" Type="datetime" Nullable="false" />
+    <Property Name="HolidayEnd" Type="datetime" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Reason" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Sheets">
+    <Key>
+      <PropertyRef Name="SheetId" />
+    </Key>
+    <Property Name="SheetId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DateStarted" Type="datetime" Nullable="false" />
+    <Property Name="ApprovedDays" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="SystemUsers">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Admin" Type="bit" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="LastLogin" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SheetId" Type="int" Nullable="false" />
+    <Property Name="TaskDescription" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="TaskNotes" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="HoursWorked" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/themes/base/css")
+
+</head>
+<body>
+
+    <div>
+        <center>
+           <img alt="Tamkeen" src="~/Images/tamkeen.png" />
+        </center>
+    </div>
+
+    <div style="width: auto; background-color: #728ea7; text-align: center;">
+
+        @if (Request.IsAuthenticated)
+        {
+            <strong>User :</strong> 
+            <strong>@Html.Encode(User.Identity.Name.Split('-')[0])</strong> 
+            <span>| </span>
+            <strong>@Request.Cookies["UserInfo"]["Name"]</strong> 
+            <span>| </span>
+            <strong>@Html.ActionLink("My Sheets", "Index", "Sheet")</strong> 
+            <span>| </span>
+            <strong>@Html.ActionLink("My Casual Vacations", "Index", "CasualHoliday")</strong> 
+            <span>| </span>
+            <strong>@Html.ActionLink("My Scheduled Vacations", "Index", "ScheduledHoliday")</strong> 
+            <span>| </span>
+            <strong>@Html.ActionLink("Edit My Account", "Edit", "User")</strong> 
+            <span>| </span>
+            <strong>@Html.ActionLink("Log Out", "Logout", "User") </strong>
+            <span>| </span>
+        }
+        else
+        { 
+            
+            //@Html.ActionLink("Register !!!", "Registration", "User") // will be removed
+            //<span>| </span>
+            @Html.ActionLink("Log In", "Login", "User")   
+           
+        }
+    </div>
+
+
+    <div style="width: auto; background-color: #ff6a00; text-align: center">
+        @if (Request.IsAuthenticated)
+        {
+            if (User.Identity.Name.Split('-')[1] == (true).ToString())
+            {
+            <strong>Administrator Tools :</strong> 
+            <span>| </span>
+            <strong>@Html.ActionLink("Create New User", "Registration", "User")</strong>
+            <span>| </span>
+            <strong>@Html.ActionLink("User's Profile List", "Index", "User")</strong>
+            <span>| </span>
+                      
+            <strong>@Html.ActionLink("All Sheets List", "Index", "Sheet", new { email = "ALL" }, null)</strong>
+            <span>| </span>
+            <strong>@Html.ActionLink("Casual Vacations", "Index", "CasualHoliday", new { email = "ALL" }, null)</strong>
+            <span>| </span>
+            <strong>@Html.ActionLink("Scheduled Vacations", "Index", "ScheduledHoliday", new { email = "ALL" }, null)</strong>
+            <span>| </span>
+            }
+        }
+    </div>
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
+    <div id="footer" style="text-align: center">
+        <br />
+        <p>Copyright © Tamkeen Capital @DateTime.Now.Year  All Rights Reserved </p>
+    </div>
+</body>
+</html>
+

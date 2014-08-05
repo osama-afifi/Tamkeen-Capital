@@ -1,0 +1,70 @@
+﻿@model IEnumerable<TimeSheetApp.Models.UserModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align:center">User's Index</h2>
+
+<p></p>
+
+<div id="SheetsTable">
+    <table id="one-column-emphasis" summary="My Timesheets" style="width:80%;text-align:center">
+        <colgroup>
+            <col class="oce-first" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mobile)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Admin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastLogin)
+                </th>
+                <th> @Html.ActionLink("Create New User", "Registration","User")</th>
+            </tr>
+        </thead>
+        <tbody>
+       
+    @foreach (var item in Model)
+    {
+         <tr onclick="location.href='../User/ProfileID?email=@item.Email';">
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Admin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastLogin)
+            </td>
+            <td>
+            @Html.ActionLink("Delete", "Delete", new {  email=item.Email })
+            </td>
+        </tr>
+    }
+        </tbody>
+    </table>
+</div>

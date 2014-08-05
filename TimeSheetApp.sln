@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeSheetApp", "TimeSheetApp\TimeSheetApp.csproj", "{C911C87D-22DB-46DF-A9E6-0E733182407B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C911C87D-22DB-46DF-A9E6-0E733182407B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C911C87D-22DB-46DF-A9E6-0E733182407B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C911C87D-22DB-46DF-A9E6-0E733182407B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C911C87D-22DB-46DF-A9E6-0E733182407B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

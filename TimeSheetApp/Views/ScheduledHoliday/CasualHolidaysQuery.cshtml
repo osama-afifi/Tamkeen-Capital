@@ -1,0 +1,92 @@
+﻿@model IEnumerable<TimeSheetApp.Models.CasHolidays>
+
+@{
+    ViewBag.Title = "Casual Vacations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center">Casual Vacations Query</h2>
+
+<p>
+</p>
+<div id="SheetsTable">
+    <table id="one-column-emphasis" summary="My Timesheets" style="width: 80%; text-align: center">
+        <colgroup>
+            <col class="oce-first" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+
+                <th>
+                   Vacation Date
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Reason)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserModel.Mobile)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserModel.Admin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserModel.LastLogin)
+                </th>
+                <th>
+                    @if (Request.Cookies["UserInfo"] != null && Request.Cookies["UserInfo"]["Admin"] == (true).ToString())
+                    {
+                        @Html.ActionLink("Create New", "Create", "CasualHoliday")
+                    }
+                    else
+                    {
+                     @Html.ActionLink("Create New", "MyCreate","CasualHoliday")
+                    }
+
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.UserModel.FirstName @item.UserModel.LastName
+                    </td>
+                 
+                    <td>
+                        @item.HolidayDate.ToString(" ddd dd MMM yyyy ")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Reason)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserModel.Mobile)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserModel.Admin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserModel.LastLogin)
+                    </td>
+                    @if(item.HolidayDate>=DateTime.Now)
+                    {
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CasualHolidayId })
+                    </td>
+                    }
+                    else {<td></td>}
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db8bc58a7c5b7347cbb656a21900e60022ModelStoreContainer" CdmEntityContainer="db8bc58a7c5b7347cbb656a21900e60022Entities">
+    <EntitySetMapping Name="CasualHolidays">
+      <EntityTypeMapping TypeName="db8bc58a7c5b7347cbb656a21900e60022Model.CasualHoliday">
+        <MappingFragment StoreEntitySet="CasualHolidays">
+          <ScalarProperty Name="CasualHolidayId" ColumnName="CasualHolidayId" />
+          <ScalarProperty Name="HolidayDay" ColumnName="HolidayDay" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ScheduledHolidays">
+      <EntityTypeMapping TypeName="db8bc58a7c5b7347cbb656a21900e60022Model.ScheduledHoliday">
+        <MappingFragment StoreEntitySet="ScheduledHolidays">
+          <ScalarProperty Name="ScheduledHolidayId" ColumnName="ScheduledHolidayId" />
+          <ScalarProperty Name="HolidayStart" ColumnName="HolidayStart" />
+          <ScalarProperty Name="HolidayEnd" ColumnName="HolidayEnd" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sheets">
+      <EntityTypeMapping TypeName="db8bc58a7c5b7347cbb656a21900e60022Model.Sheet">
+        <MappingFragment StoreEntitySet="Sheets">
+          <ScalarProperty Name="SheetId" ColumnName="SheetId" />
+          <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
+          <ScalarProperty Name="ApprovedDays" ColumnName="ApprovedDays" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="db8bc58a7c5b7347cbb656a21900e60022Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemUsers">
+      <EntityTypeMapping TypeName="db8bc58a7c5b7347cbb656a21900e60022Model.SystemUser">
+        <MappingFragment StoreEntitySet="SystemUsers">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Admin" ColumnName="Admin" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasks">
+      <EntityTypeMapping TypeName="db8bc58a7c5b7347cbb656a21900e60022Model.Task">
+        <MappingFragment StoreEntitySet="Tasks">
+          <ScalarProperty Name="TaskId" ColumnName="TaskId" />
+          <ScalarProperty Name="SheetId" ColumnName="SheetId" />
+          <ScalarProperty Name="TaskDescription" ColumnName="TaskDescription" />
+          <ScalarProperty Name="TaskNotes" ColumnName="TaskNotes" />
+          <ScalarProperty Name="HoursWorked" ColumnName="HoursWorked" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

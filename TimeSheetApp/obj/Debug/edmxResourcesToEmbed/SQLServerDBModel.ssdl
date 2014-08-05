@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db8bc58a7c5b7347cbb656a21900e60022Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="db8bc58a7c5b7347cbb656a21900e60022ModelStoreContainer">
+    <EntitySet Name="CasualHolidays" EntityType="db8bc58a7c5b7347cbb656a21900e60022Model.Store.CasualHolidays" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScheduledHolidays" EntityType="db8bc58a7c5b7347cbb656a21900e60022Model.Store.ScheduledHolidays" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sheets" EntityType="db8bc58a7c5b7347cbb656a21900e60022Model.Store.Sheets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="db8bc58a7c5b7347cbb656a21900e60022Model.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SystemUsers" EntityType="db8bc58a7c5b7347cbb656a21900e60022Model.Store.SystemUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tasks" EntityType="db8bc58a7c5b7347cbb656a21900e60022Model.Store.Tasks" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CasualHolidays_SystemUsers" Association="db8bc58a7c5b7347cbb656a21900e60022Model.Store.FK_CasualHolidays_SystemUsers">
+      <End Role="SystemUsers" EntitySet="SystemUsers" />
+      <End Role="CasualHolidays" EntitySet="CasualHolidays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScheduledHolidays_SystemUsers" Association="db8bc58a7c5b7347cbb656a21900e60022Model.Store.FK_ScheduledHolidays_SystemUsers">
+      <End Role="SystemUsers" EntitySet="SystemUsers" />
+      <End Role="ScheduledHolidays" EntitySet="ScheduledHolidays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sheets_SystemUsers" Association="db8bc58a7c5b7347cbb656a21900e60022Model.Store.FK_Sheets_SystemUsers">
+      <End Role="SystemUsers" EntitySet="SystemUsers" />
+      <End Role="Sheets" EntitySet="Sheets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_Sheets" Association="db8bc58a7c5b7347cbb656a21900e60022Model.Store.FK_Tasks_Sheets">
+      <End Role="Sheets" EntitySet="Sheets" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CasualHolidays">
+    <Key>
+      <PropertyRef Name="CasualHolidayId" />
+    </Key>
+    <Property Name="CasualHolidayId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="HolidayDay" Type="datetime" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ScheduledHolidays">
+    <Key>
+      <PropertyRef Name="ScheduledHolidayId" />
+    </Key>
+    <Property Name="ScheduledHolidayId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="HolidayStart" Type="date" Nullable="false" />
+    <Property Name="HolidayEnd" Type="date" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Reason" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Sheets">
+    <Key>
+      <PropertyRef Name="SheetId" />
+    </Key>
+    <Property Name="SheetId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DateStarted" Type="datetime" Nullable="false" />
+    <Property Name="ApprovedDays" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="SystemUsers">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="Admin" Type="bit" Nullable="false" />
+    <Property Name="Mobile" Type="nvarchar" Nullable="false" MaxLength="15" />
+    <Property Name="LastLogin" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tasks">
+    <Key>
+      <PropertyRef Name="TaskId" />
+    </Key>
+    <Property Name="TaskId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SheetId" Type="int" Nullable="false" />
+    <Property Name="TaskDescription" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="TaskNotes" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="HoursWorked" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CasualHolidays_SystemUsers">
+    <End Role="SystemUsers" Type="db8bc58a7c5b7347cbb656a21900e60022Model.Store.SystemUsers" Multiplicity="1" />
+    <End Role="CasualHolidays" Type="db8bc58a7c5b7347cbb656a21900e60022Model.Store.CasualHolidays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemUsers">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="CasualHolidays">
+        <PropertyRef Name="UserEmail" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScheduledHolidays_SystemUsers">
+    <End Role="SystemUsers" Type="db8bc58a7c5b7347cbb656a21900e60022Model.Store.SystemUsers" Multiplicity="1" />
+    <End Role="ScheduledHolidays" Type="db8bc58a7c5b7347cbb656a21900e60022Model.Store.ScheduledHolidays" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemUsers">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="ScheduledHolidays">
+        <PropertyRef Name="UserEmail" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sheets_SystemUsers">
+    <End Role="SystemUsers" Type="db8bc58a7c5b7347cbb656a21900e60022Model.Store.SystemUsers" Multiplicity="1" />
+    <End Role="Sheets" Type="db8bc58a7c5b7347cbb656a21900e60022Model.Store.Sheets" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SystemUsers">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Sheets">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_Sheets">
+    <End Role="Sheets" Type="db8bc58a7c5b7347cbb656a21900e60022Model.Store.Sheets" Multiplicity="1" />
+    <End Role="Tasks" Type="db8bc58a7c5b7347cbb656a21900e60022Model.Store.Tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sheets">
+        <PropertyRef Name="SheetId" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="SheetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

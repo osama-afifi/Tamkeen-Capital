@@ -1,0 +1,55 @@
+﻿@model TimeSheetApp.Models.Task
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@functions
+{
+    int HoursOnTask(string s )
+    {
+        int counter = 0;
+        for (int i = 0; i < s.Length; i++)
+            if (s[i]!='0')
+                counter += (int)(s[i]-'0');
+        return counter;
+    } 
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Task</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SheetId):
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SheetId)
+    </div>
+
+    <div class="display-label">
+       Total Hours Worked On Task:
+    </div>
+    <div class="display-field">
+        @HoursOnTask(Model.HoursDone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description):
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Notes):
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Delete Task", "Delete", new { ID = Model.TaskId })
+</p>

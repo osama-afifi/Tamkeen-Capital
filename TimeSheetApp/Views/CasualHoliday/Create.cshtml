@@ -1,0 +1,42 @@
+﻿@model TimeSheetApp.Models.CasHolidays
+
+@{
+    ViewBag.Title = "Create Casual Holiday";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset style="text-align:center">
+        <legend>Create Casual Holiday</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HolidayDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HolidayDate)
+            <br />
+            @Html.ValidationMessageFor(model => model.HolidayDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Reason)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Reason)
+            <br />
+            @Html.ValidationMessageFor(model => model.Reason)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

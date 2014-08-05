@@ -1,0 +1,77 @@
+﻿@model TimeSheetApp.Models.UserModel
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.FirstName @Model.LastName</h2>
+
+<fieldset style="text-align: center; font-size: medium">
+    <legend>Profile </legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+    <br />
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+    <br />
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+    <br />
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Mobile)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Mobile)
+    </div>
+    <br />
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Admin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Admin)
+    </div>
+    <br />
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.LastLogin)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastLogin)
+    </div>
+    <br />
+
+    <ul style="text-align: center; font-size: medium">
+        <li>@Html.ActionLink(Model.FirstName + "'s Timesheets", "Index", "Sheet", new { email = Model.Email }, null)</li>
+        <li>@Html.ActionLink(Model.FirstName + "'s Casual Vacations", "Index", "CasualHoliday", new { email = Model.Email }, null)</li>
+        <li>@Html.ActionLink(Model.FirstName + "'s Scheduled Vacations", "Index", "ScheduledHoliday", new { email = Model.Email }, null)</li>
+        @if (Model.Admin == false)
+        {
+            <li>@Html.ActionLink("Promote to Administrator", "PromoteAdmin", "User", new { email = Model.Email }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Downgrade to Normal User", "PromoteAdmin", "User", new { email = Model.Email }, null)</li>
+        }
+
+    </ul>
+</fieldset>
+
+
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
